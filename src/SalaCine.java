@@ -30,4 +30,14 @@ public class SalaCine {
             }
         }
     }
+
+    public void motrarSalaCine() {
+        for (int i = 0; i < asientos.length; i++) {
+            if (asientos[i]) {
+                System.out.print("[*]");
+            }else {
+                System.out.print("[O]");
+            }
+        }
+    }
 }

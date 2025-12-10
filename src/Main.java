@@ -49,7 +49,7 @@ public class Main {
                 continuar = false;
             }
         }
-
+        sala.motrarSalaCine();
 
         sc.close();
     }
