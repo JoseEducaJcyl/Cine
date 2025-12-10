@@ -23,7 +23,11 @@ public class SalaCine {
     public void mostrarDisponibilidad() {
         System.out.println("Disponibilidad de Asientos");
         for (int i = 0; i < asientos.length; i++) {
-            System.out.println("Asiento " + (i + 1) + ": " + (asientos[i] ? "Ocupado" : "Libre"));
+            if (asientos[i]) {
+                System.out.println("Asiento Ocupado.");
+            }else{
+                System.out.println("Asiento Libre.");
+            }
         }
     }
 }
