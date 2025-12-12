@@ -14,42 +14,70 @@ public class Main {
         System.out.println("1. Mañana: " + proyeccionManiana.getTitulo());
         System.out.println("2. Tarde (3D): " + proyeccionTarde.getTitulo());
 
-        sala.mostrarDisponibilidad();
+        System.out.println("-----MENÚ-----");
+        System.out.println(" 1----- Mostrar disponibiliodad");
+        System.out.println(" 2----- Elegir proyeccion");
+        System.out.println(" 3----- Mostrar sala de cine");
+        System.out.println(" SALIR (Cualquier tecla)");
+        System.out.println("Escriba la opcion: ");
+        int opcionMenu = sc.nextInt();
+        boolean bandera = false;
 
-        boolean continuar = true;
-        Proyeccion seleccionada = null;
-
-        System.out.print("\nElige horario (1.Mañana / 2.Tarde): ");
-        int opcion = sc.nextInt();
-
-        while(continuar){
-            switch (opcion){
+        while (!bandera) {
+            switch (opcionMenu) {
                 case 1:
-                    seleccionada = proyeccionManiana;
-                    break;
+                    sala.mostrarDisponibilidad();
+                    System.out.println("Escriba la opcion: ");
+                    sc.nextInt();
+
                 case 2:
-                    seleccionada = proyeccionTarde;
-                    break;
-                default:
-                    System.out.println("Valor incorrecto. " + opcion);
+                    boolean continuar = true;
+                    Proyeccion seleccionada = null;
+
                     System.out.print("\nElige horario (1.Mañana / 2.Tarde): ");
-                    opcion = sc.nextInt();
-            }
+                    int opcion = sc.nextInt();
 
-            System.out.print("Elige número de asiento (1-50): ");
-            int asiento = sc.nextInt();
+                    while (continuar) {
+                        switch (opcion) {
+                            case 1:
+                                seleccionada = proyeccionManiana;
+                                break;
+                            case 2:
+                                seleccionada = proyeccionTarde;
+                                break;
+                            default:
+                                System.out.println("Valor incorrecto. " + opcion);
+                                System.out.print("\nElige horario (1.Mañana / 2.Tarde): ");
+                                opcion = sc.nextInt();
+                        }
 
-            try {
-                sala.reservar(asiento);
-                System.out.println("\nReserva confirmada.");
-                System.out.println("Película: " + seleccionada.getTitulo());
-                System.out.println("Precio final: $" + seleccionada.calcularPrecio());
-            } catch (AsientoNoDisponibleException e) {
-                System.out.println("\nERROR: " + e.getMessage());
-                continuar = false;
+                        System.out.print("Elige número de asiento (1-50): ");
+                        int asiento = sc.nextInt();
+
+                        try {
+                            sala.reservar(asiento);
+                            System.out.println("\nReserva confirmada.");
+                            System.out.println("Película: " + seleccionada.getTitulo());
+                            System.out.println("Precio final: $" + seleccionada.calcularPrecio());
+                        } catch (AsientoNoDisponibleException e) {
+                            System.out.println("\nERROR: " + e.getMessage());
+                            System.out.println("Escriba la opcion: ");
+                            sc.nextInt();
+                            continuar = false;
+                        }
+                    }
+                case 3:
+                    sala.motrarSalaCine();
+                    System.out.println(" ");
+                    System.out.println("Escriba la opcion: ");
+                    sc.nextInt();
+
+                default:
+                    System.out.println("Saliendo....");
+                    bandera = true;
             }
         }
-        sala.motrarSalaCine();
+
 
         sc.close();
     }
